@@ -8,21 +8,42 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      faces: []
+      faces: [],
+      date: "",
+      message: ""
     };
 
+    this.getDate = this.getDate.bind(this);
+    this.getMessage = this.getMessage.bind(this);
     this.getMood = this.getMood.bind(this);
+    // this.paintFaces = this.paintFaces.bind(this);
   }
 
+  getDate = event => {
+    this.setState({
+      date: event.target.value
+    });
+  };
+
   getMood = event => {
-    let thisFace = event.currentTarget.value;
-    console.log(thisFace);
     const { faces } = this.state;
-    if (thisFace === ":)") {
-      faces.push(thisFace);
-    }
+    let thisFace = event.currentTarget.value;
+    faces.push(thisFace);
     this.setState({ faces: faces });
   };
+
+  getMessage = event => {
+    this.setState({
+      message: event.target.value
+    });
+  };
+
+  // paintFaces = event => {
+  //   if (this.state.faces === "happy") {
+  //     return;
+  //   } else if (this.state.faces === "sad") {
+  //   }
+  // };
 
   render() {
     const { faces } = this.state;
@@ -36,7 +57,12 @@ class App extends React.Component {
               return <Home faces={faces} />;
             }}
           />
-          <Route path="/editor" component={Editor} faces={faces} getMood={this.getMood} />
+          <Route
+            path="/editor"
+            render={routerProps => {
+              return <Editor routerProps={routerProps} faces={faces} getMood={this.getMood} getMessage={this.getMessage} getDate={this.getDate} />;
+            }}
+          />
         </Switch>
       </div>
     );

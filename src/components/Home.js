@@ -12,6 +12,7 @@ const Home = props => {
           +
         </Link>
       </button>
+
       <ul className="face--container">
         {faces.map((face, index) => {
           return (

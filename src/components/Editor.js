@@ -17,9 +17,9 @@ const Editor = props => {
           Mood
         </label>
         <div className="editor__mood--inputs">
-          <input className="editor__mood--inputs--smile" type="checkbox" name=":)" value="happy" onChange={getMood} /> :)
+          <input className="editor__mood--inputs--smile" type="checkbox" name=":)" value=":)" onChange={getMood} /> :)
           <br />
-          <input className="editor__mood--inputs--sad" type="checkbox" name=":(" value="sad" onChange={getMood} /> :(
+          <input className="editor__mood--inputs--sad" type="checkbox" name=":(" value=":(" onChange={getMood} /> :(
           <br />
         </div>
       </div>

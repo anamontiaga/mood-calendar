@@ -16,13 +16,16 @@ class App extends React.Component {
     this.getDate = this.getDate.bind(this);
     this.getMessage = this.getMessage.bind(this);
     this.getMood = this.getMood.bind(this);
-    // this.paintFaces = this.paintFaces.bind(this);
+    this.saveData = this.saveData.bind(this);
+    this.getData = this.getData.bind(this);
+    this.localStorage = this.localStorage.bind(this);
   }
 
   getDate = event => {
     this.setState({
       date: event.target.value
     });
+    this.localStorage();
   };
 
   getMood = event => {
@@ -30,20 +33,32 @@ class App extends React.Component {
     let thisFace = event.currentTarget.value;
     faces.push(thisFace);
     this.setState({ faces: faces });
+    this.localStorage();
   };
 
   getMessage = event => {
     this.setState({
       message: event.target.value
     });
+    this.localStorage();
   };
 
-  // paintFaces = event => {
-  //   if (this.state.faces === "happy") {
-  //     return;
-  //   } else if (this.state.faces === "sad") {
-  //   }
-  // };
+  // LOCAL STORAGE
+
+  saveData() {
+    localStorage.setItem("moodData", JSON.stringify(this.state));
+  }
+
+  getData() {
+    return JSON.parse(localStorage.getItem("moodData"));
+  }
+
+  localStorage() {
+    this.saveData();
+    this.getData();
+  }
+
+  // RENDERIZADO
 
   render() {
     const { faces } = this.state;

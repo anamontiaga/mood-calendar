@@ -10,10 +10,12 @@ class App extends React.Component {
     this.state = {
       faces: [],
       date: "",
+      checkedface: "",
       message: ""
     };
 
     this.getDate = this.getDate.bind(this);
+    this.getFace = this.getFace.bind(this);
     this.getMessage = this.getMessage.bind(this);
     this.getMood = this.getMood.bind(this);
     this.saveData = this.saveData.bind(this);
@@ -34,6 +36,10 @@ class App extends React.Component {
     faces.push(thisFace);
     this.setState({ faces: faces });
     this.localStorage();
+  };
+
+  getFace = event => {
+    this.setState({ checkedface: event.target.value });
   };
 
   getMessage = event => {
@@ -61,7 +67,8 @@ class App extends React.Component {
   // RENDERIZADO
 
   render() {
-    const { faces } = this.state;
+    const { faces, checkedface } = this.state;
+    console.log(checkedface);
     return (
       <div className="app">
         <Switch>
@@ -75,7 +82,7 @@ class App extends React.Component {
           <Route
             path="/editor"
             render={routerProps => {
-              return <Editor routerProps={routerProps} faces={faces} getMood={this.getMood} getMessage={this.getMessage} getDate={this.getDate} />;
+              return <Editor routerProps={routerProps} faces={faces} checkedface={checkedface} getMood={this.getMood} getFace={this.getFace} getMessage={this.getMessage} getDate={this.getDate} />;
             }}
           />
         </Switch>

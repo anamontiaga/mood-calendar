@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../stylesheets/Editor.scss";
 
 const Editor = props => {
-  const { checkedface, getDate, getFace, getMood, getMessage } = props;
+  const { getDate, getMood, getMessage, checkedface, cancelMood } = props;
   return (
     <div className="editor">
       <div className="editor__date">
@@ -17,9 +17,9 @@ const Editor = props => {
           Mood
         </label>
         <div className="editor__mood--inputs">
-          <input className="editor__mood--inputs--smile" type="checkbox" name=":)" value=":)" onChange={(getMood, getFace)} /> :)
+          <input className="editor__mood--inputs--smile" type="checkbox" name=":)" value=":)" onChange={getMood} /> :)
           <br />
-          <input className="editor__mood--inputs--sad" type="checkbox" name=":(" value=":(" onChange={(getMood, getFace)} /> :(
+          <input className="editor__mood--inputs--sad" type="checkbox" name=":(" value=":(" onChange={getMood} /> :(
           <br />
         </div>
       </div>
@@ -27,7 +27,6 @@ const Editor = props => {
         <label className="editor__message--label" htmlFor="message">
           Message
         </label>
-
         {checkedface === ":)" ? <input className="js-date editor__message--input" id="message" type="message" name="message" placeholder="¿Por qué es un buen día?" onChange={getMessage} /> : <input className="js-date editor__message--input" id="message" type="message" name="message" placeholder="Lo siento, hoy no puedes dejar un mensaje" onChange={getMessage} disabled />}
       </div>
       <button className="editor__button--save">
@@ -35,10 +34,8 @@ const Editor = props => {
           SAVE YOUR MOOD
         </Link>
       </button>
-      <button className="editor__button--cancel">
-        <Link to="/" className="editor__button--cancel--link">
-          I DON´T WANT TO SEND MY MOOD
-        </Link>
+      <button className="editor__button--cancel" onClick={cancelMood}>
+        I DON´T WANT TO SEND MY MOOD
       </button>
     </div>
   );

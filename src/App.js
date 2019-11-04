@@ -10,17 +10,22 @@ class App extends React.Component {
     this.state = {
       faces: [],
       date: "",
-      checkedface: "",
+      checkedface: ":)",
       message: ""
     };
 
     this.getDate = this.getDate.bind(this);
-    this.getFace = this.getFace.bind(this);
     this.getMessage = this.getMessage.bind(this);
     this.getMood = this.getMood.bind(this);
     this.saveData = this.saveData.bind(this);
     this.getData = this.getData.bind(this);
+    this.cancelMood = this.cancelMood.bind(this);
+    this.paintSavedFaces = this.paintSavedFaces.bind(this);
     this.localStorage = this.localStorage.bind(this);
+  }
+
+  componentDidMount() {
+    this.paintSavedFaces();
   }
 
   getDate = event => {
@@ -34,12 +39,8 @@ class App extends React.Component {
     const { faces } = this.state;
     let thisFace = event.currentTarget.value;
     faces.push(thisFace);
-    this.setState({ faces: faces });
+    this.setState({ faces: faces, checkedface: thisFace });
     this.localStorage();
-  };
-
-  getFace = event => {
-    this.setState({ checkedface: event.target.value });
   };
 
   getMessage = event => {
@@ -64,11 +65,28 @@ class App extends React.Component {
     this.getData();
   }
 
+  //  NO FUNCIONA - REVISAR
+  cancelMood() {
+    const { faces } = this.state;
+    this.setState({
+      faces: faces.slice(faces.lenght - 1, faces.lenght)
+    });
+  }
+
+  paintSavedFaces() {
+    if (localStorage.getItem("moodData")) {
+      const savedFaces = this.getData("moodData").faces;
+      this.setState({
+        faces: savedFaces
+      });
+    }
+  }
+
   // RENDERIZADO
 
   render() {
     const { faces, checkedface } = this.state;
-    console.log(checkedface);
+
     return (
       <div className="app">
         <Switch>
@@ -82,7 +100,7 @@ class App extends React.Component {
           <Route
             path="/editor"
             render={routerProps => {
-              return <Editor routerProps={routerProps} faces={faces} checkedface={checkedface} getMood={this.getMood} getFace={this.getFace} getMessage={this.getMessage} getDate={this.getDate} />;
+              return <Editor routerProps={routerProps} faces={faces} getMood={this.getMood} getMessage={this.getMessage} getDate={this.getDate} checkedface={checkedface} cancelMood={this.cancelMood} />;
             }}
           />
         </Switch>

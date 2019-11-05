@@ -21,6 +21,7 @@ class App extends React.Component {
     this.getData = this.getData.bind(this);
     this.cancelMood = this.cancelMood.bind(this);
     this.paintSavedFaces = this.paintSavedFaces.bind(this);
+    this.handleValidation = this.handleValidation.bind(this);
     this.localStorage = this.localStorage.bind(this);
   }
 
@@ -81,6 +82,15 @@ class App extends React.Component {
     }
   }
 
+  // NO FUNCIONA
+  handleValidation() {
+    const { date } = this.state;
+    if (date === "") {
+      alert("Date cannot be empty");
+      this.cancelMood();
+    }
+  }
+
   // RENDERIZADO
 
   render() {
@@ -99,7 +109,7 @@ class App extends React.Component {
           <Route
             path="/editor"
             render={routerProps => {
-              return <Editor routerProps={routerProps} faces={faces} getMood={this.getMood} getMessage={this.getMessage} getDate={this.getDate} checkedface={checkedface} cancelMood={this.cancelMood} />;
+              return <Editor routerProps={routerProps} faces={faces} getMood={this.getMood} getMessage={this.getMessage} getDate={this.getDate} checkedface={checkedface} cancelMood={this.cancelMood} handleValidation={this.handleValidation} />;
             }}
           />
         </Switch>

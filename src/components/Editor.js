@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../stylesheets/Editor.scss";
 
 const Editor = props => {
-  const { getDate, getMood, getMessage, checkedface, cancelMood, handleValidation } = props;
+  const { getDate, getMood, getMessage, checkedface, cancelMood, cancelSendingMood } = props;
   return (
     <div className="editor">
       <form className="editor__date">
@@ -30,7 +30,7 @@ const Editor = props => {
         {checkedface === ":)" ? <input className="js-date editor__message--input" id="message" type="message" name="message" placeholder="¿Por qué es un buen día?" onChange={getMessage} /> : <input className="js-date editor__message--input" id="message" type="message" name="message" placeholder="Lo siento, hoy no puedes dejar un mensaje" onChange={getMessage} disabled />}
       </div>
       <button className="editor__button--save">
-        <Link to="/" className="editor__button--save--link" onClick={handleValidation}>
+        <Link to="/" className="editor__button--save--link" onClick={cancelSendingMood}>
           SAVE YOUR MOOD
         </Link>
       </button>

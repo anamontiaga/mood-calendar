@@ -65,11 +65,10 @@ class App extends React.Component {
     this.getData();
   }
 
-  //  NO FUNCIONA - REVISAR
   cancelMood() {
     const { faces } = this.state;
     this.setState({
-      faces: faces.slice(faces.lenght - 1, faces.lenght)
+      faces: faces.splice(0, faces.length - 1)
     });
   }
 

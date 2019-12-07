@@ -1,6 +1,4 @@
-# Mood Calendar 
-#### for brighten your days
-
+# Mood Calendar for brighten your days
 
 ## DEMO
 ![Demo](http://g.recordit.co/z8mFLvVkzx.gif)
